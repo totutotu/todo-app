@@ -13,8 +13,9 @@ const TaskList = () => {
         const fetchTasks = async () => {
             setLoading(true);
             const res = await getTasks();
+
             if (res.error) {
-                setError('Error fetching tasks');
+                setError(res.message);
             } else {
                 setTasks(res.tasks);
                 setError(null);
@@ -29,7 +30,7 @@ const TaskList = () => {
         const taskToUpdate = tasks.find(task => task.id === Number(taskId));
         const res = await changeTaskCompleteStatus(taskToUpdate);
         if (res.error) {
-            setError(error);
+            setError(res.message);
         } else {
             setTasks([
                 ...tasks.filter(task => task.id !== taskToUpdate.id),
@@ -41,7 +42,7 @@ const TaskList = () => {
     const remove = async (taskId) => {
         const res = await removeTask(taskId);
         if (res.error) {
-            setError(error);
+            setError(res.message);
         } else {
             setTasks([
                 ...tasks.filter(task => task.id !== Number(taskId))
@@ -54,7 +55,7 @@ const TaskList = () => {
     const create = async (description) => {
         const res = await createTask(description);
         if (res.error) {
-            setError(error);
+            setError(res.message);
         } else {
             setTasks([
                 ...tasks,
@@ -67,7 +68,7 @@ const TaskList = () => {
 
     const completedTasks = () => {
         const completedTasks = tasks.filter(task => !task.completed);
-        if (completedTasks.length === 0) return <h2 className='infotext'>No incomplete tasks!</h2>;
+        if (completedTasks.length === 0) return <h2 className='infotext'>No incomplete tasks</h2>;
         return (
             <div className='card-container incomplete'>
                 {completedTasks.map(task => 
@@ -93,7 +94,7 @@ const TaskList = () => {
                 createTask={create}
             />
             <button onClick={() => setShowCreateModal(true)} className='green-button'>New Task</button>
-            {error ?? <h2 className='infotext'>{error}</h2>}
+            {error ? <h2 className='infotext'>{error}</h2> : ''}
             {tasks.length === 0 ?? <h2 className='infotext'>No added tasks yet</h2>}
 
             {completedTasks()}

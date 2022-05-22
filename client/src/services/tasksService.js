@@ -5,14 +5,21 @@ const api = axios.create({
 });
 
 export const getTasks = async () => {
-    const res = await api.get('/');
+    try {
+        const res = await api.get('/');
 
-    if (res.status === 200) {
-        return {
-            tasks: res.data.tasks,
-            error: false,
-        };
-    } else {
+        if (res.status === 200) {
+            return {
+                tasks: res.data.tasks,
+                error: false,
+            };
+        } else {
+            return {
+                error: true,
+                message: 'Fetching tasks failed',
+            };
+        }
+    } catch (e) {
         return {
             error: true,
             message: 'Fetching tasks failed',
@@ -21,51 +28,72 @@ export const getTasks = async () => {
 };
 
 export const changeTaskCompleteStatus = async (task) => {
-    const data = {
-        ...task,
-        completed: !task.completed,
-    };
-    const res = await api.put(`/${task.id}`, data);
-
-    if (res.status === 204) {
-        return {
-            error: false,
+    try {
+        const data = {
+            ...task,
+            completed: !task.completed,
         };
-    } else {
+        const res = await api.put(`/${task.id}`, data);
+
+        if (res.status === 204) {
+            return {
+                error: false,
+            };
+        } else {
+            return {
+                error: true,
+                message: `Setting task ${task.description} completed failed`,
+            };
+        }
+    } catch (e) {
         return {
             error: true,
-            message: `Setting task ${task.description} completed failed`,
+            message: 'asdfasdfasdf tasks failed',
         };
     }
 };
 
 export const removeTask = async (taskId) => {
-    const res = await api.delete(`/${taskId}`);
+    try {
+        const res = await api.delete(`/${taskId}`);
 
-    if (res.status === 204) {
-        return {
-            error: false,
-        };
-    } else {
+        if (res.status === 204) {
+            return {
+                error: false,
+            };
+        } else {
+            return {
+                error: true,
+                message: `Deleting task ${taskId} failed`,
+            };
+        }
+    } catch (e) {
         return {
             error: true,
-            message: `Deleting task ${taskId}`,
+            message: `Deleting task ${taskId} failed`,
         };
     }
 };
 
 export const createTask = async (description) => {
-    const data = {
-        description,
-    };
-    const res = await api.post('/', data);
-
-    if (res.status === 201) {
-        return {
-            task: res.data,
-            error: false,
+    try {
+        const data = {
+            description,
         };
-    } else {
+        const res = await api.post('/', data);
+
+        if (res.status === 201) {
+            return {
+                task: res.data,
+                error: false,
+            };
+        } else {
+            return {
+                error: true,
+                message: `Creating a new task ${description} failed`,
+            };
+        }
+    } catch (e) {
         return {
             error: true,
             message: `Creating a new task ${description} failed`,
