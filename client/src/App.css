@@ -1,0 +1,146 @@
+.App {
+  text-align: center;
+}
+
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 5vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.card-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.card {
+  margin: 10px;
+  text-align: left;
+  background-color: lightgrey;
+  order: 5;
+  border: gray;
+  border-style: groove;
+  border-radius: 5px;
+  padding-right: 5px;
+  padding-left: 5px;
+}
+
+.completed-card {
+  background-color: grey;
+}
+
+.card .buttons {
+  text-align: center;
+  padding-bottom: 5px;
+}
+.card .buttons .warning {
+  margin-left: 5px;
+  border-radius: 5px;
+  background-color: red;
+  font-weight: 1px;
+  color: white;
+}
+
+.card .buttons .warning:hover {
+  background-color: rgb(204, 3, 3);
+}
+
+.card .buttons .complete {
+  border-radius: 5px;
+  background-color: greenyellow;
+  font-weight: 1px;
+}
+
+.card .buttons .complete:hover {
+  background-color: rgba(139, 207, 36, 0.993);
+}
+
+.infotext {
+  align-content: center;
+}
+.App-link {
+  color: #61dafb;
+}
+
+.green-button {
+  background-color: greenyellow; /* Green */
+  border-radius: 5px;
+  margin-top: 15px;
+  padding: 15px 32px;
+  text-align: center;
+  display: inline-block;
+  font-size: 16px;
+}
+
+.green-button:hover {
+  background-color: rgba(139, 207, 36, 0.993);
+}
+
+.hidden {
+  display: none;
+}
+
+.modal {
+  display: block; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+
+.modal-input {
+  padding: 5px;
+  margin-left: 5px;
+  margin-right: 5px;
+  min-width: 160px;
+}
+
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
