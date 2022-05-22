@@ -84,7 +84,6 @@ const TaskList = () => {
     };
 
     if (loading) return <h2 className='infotext'>Loading...</h2>;
-    if (tasks.length === 0) return <h2 className='infotext'>No added tasks yet</h2>;
 
     return (
         <>  
@@ -95,6 +94,7 @@ const TaskList = () => {
             />
             <button onClick={() => setShowCreateModal(true)} className='green-button'>New Task</button>
             {error ?? <h2 className='infotext'>{error}</h2>}
+            {tasks.length === 0 ?? <h2 className='infotext'>No added tasks yet</h2>}
 
             {completedTasks()}
             <hr className='solid' />
